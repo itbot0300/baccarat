@@ -1,0 +1,771 @@
+/* 百家乐游戏样式 - 绿色赌桌风格 */
+
+:root {
+    --table-green: #0d5c2e;
+    --table-green-light: #147a3e;
+    --table-green-dark: #094420;
+    --felt-green: #1a7d44;
+    --gold: #d4af37;
+    --gold-light: #f4d03f;
+    --red: #c0392b;
+    --black: #1a1a1a;
+    --white: #ffffff;
+    --card-width: 80px;
+    --card-height: 112px;
+    --card-radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    background: linear-gradient(135deg, #0a3d1a 0%, #1a5c32 50%, #0a3d1a 100%);
+    min-height: 100vh;
+    color: var(--white);
+    padding: 10px;
+}
+
+.game-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* 顶部状态栏 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(180deg, var(--table-green-light) 0%, var(--table-green) 100%);
+    border-radius: 12px 12px 0 0;
+    border: 2px solid var(--gold);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.balance-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.balance-display .label {
+    font-size: 12px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+}
+
+.balance-display .value {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--gold-light);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.title {
+    font-size: 32px;
+    color: var(--gold-light);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 4px;
+}
+
+.history-stats {
+    display: flex;
+    gap: 15px;
+}
+
+.history-stats .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+}
+
+.history-stats .stat span:last-child {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* 游戏桌面 */
+.table {
+    background: linear-gradient(180deg, var(--felt-green) 0%, var(--table-green) 100%);
+    padding: 30px 20px;
+    border-left: 2px solid var(--gold);
+    border-right: 2px solid var(--gold);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 350px;
+}
+
+.player-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.area-label {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--gold-light);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.banker-area .area-label {
+    color: #e74c3c;
+}
+
+.player-area-bottom .area-label {
+    color: #3498db;
+}
+
+.cards {
+    display: flex;
+    gap: 10px;
+    min-height: var(--card-height);
+}
+
+.card-placeholder {
+    width: var(--card-width);
+    height: var(--card-height);
+    border-radius: var(--card-radius);
+    background: rgba(0, 0, 0, 0.2);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.card {
+    width: var(--card-width);
+    height: var(--card-height);
+    border-radius: var(--card-radius);
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    animation: dealCard 0.5s ease-out;
+    position: relative;
+}
+
+.card.red {
+    color: var(--red);
+}
+
+.card.black {
+    color: var(--black);
+}
+
+.card .suit {
+    font-size: 28px;
+    line-height: 1;
+}
+
+.card .rank {
+    font-size: 24px;
+    align-self: center;
+}
+
+.card .suit-bottom {
+    font-size: 28px;
+    line-height: 1;
+    align-self: flex-end;
+    transform: rotate(180deg);
+}
+
+@keyframes dealCard {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.score {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--white);
+    background: rgba(0, 0, 0, 0.4);
+    padding: 5px 20px;
+    border-radius: 20px;
+}
+
+.result-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+}
+
+.result {
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--gold-light);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.result.banker-win {
+    color: #e74c3c;
+}
+
+.result.player-win {
+    color: #3498db;
+}
+
+.result.tie {
+    color: var(--gold-light);
+}
+
+/* 下注区域 */
+.betting-area {
+    background: linear-gradient(180deg, var(--table-green) 0%, var(--table-green-dark) 100%);
+    padding: 20px;
+    border: 2px solid var(--gold);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+}
+
+.bet-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.bet-btn {
+    flex: 1;
+    max-width: 150px;
+    padding: 15px 10px;
+    border: 3px solid transparent;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%);
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.bet-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.bet-btn.selected {
+    border-color: var(--gold-light);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+.bet-btn.banker { border-color: #e74c3c; }
+.bet-btn.player { border-color: #3498db; }
+.bet-btn.tie { border-color: var(--gold); }
+
+.bet-btn.selected.banker { background: linear-gradient(180deg, #c0392b 0%, #922b21 100%); }
+.bet-btn.selected.player { background: linear-gradient(180deg, #2980b9 0%, #1a5276 100%); }
+.bet-btn.selected.tie { background: linear-gradient(180deg, #d4af37 0%, #a08525 100%); }
+
+.bet-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.bet-odds {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.bet-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.chip-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.chip-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    background: linear-gradient(180deg, #8b4513 0%, #5d2e0c 100%);
+    color: var(--gold-light);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.chip-btn:hover:not(:disabled) {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+.chip-btn.selected {
+    background: linear-gradient(180deg, #d4af37 0%, #a08525 100%);
+    color: #1a1a1a;
+}
+
+.current-bet {
+    font-size: 18px;
+    color: var(--gold-light);
+}
+
+.current-bet span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.action-btn {
+    flex: 1;
+    max-width: 200px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-btn.deal {
+    background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 100%);
+    color: #1a1a1a;
+}
+
+.action-btn.deal:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+}
+
+.action-btn.deal:disabled {
+    background: #666;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.action-btn.clear {
+    background: linear-gradient(180deg, #e74c3c 0%, #c0392b 100%);
+    color: var(--white);
+}
+
+.action-btn.clear:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(192, 57, 43, 0.5);
+}
+
+/* 历史记录 */
+.history-area {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.history-area h3 {
+    color: var(--gold-light);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.history-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.history-item {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.history-item.banker {
+    background: #c0392b;
+}
+
+.history-item.player {
+    background: #2980b9;
+}
+
+.history-item.tie {
+    background: #d4af37;
+    color: #1a1a1a;
+}
+
+/* 响应式设计 */
+@media (max-width: 600px) {
+    :root {
+        --card-width: 55px;
+        --card-height: 77px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .title {
+        font-size: 24px;
+    }
+    
+    .balance-display .value {
+        font-size: 22px;
+    }
+    
+    .bet-buttons {
+        gap: 8px;
+    }
+    
+    .bet-btn {
+        padding: 10px 5px;
+    }
+    
+    .bet-name {
+        font-size: 14px;
+    }
+    
+    .bet-odds {
+        font-size: 10px;
+    }
+    
+    .chip-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 14px;
+    }
+    
+    .action-btn {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+    
+    .result {
+        font-size: 28px;
+    }
+    
+    .cards {
+        gap: 5px;
+    }
+}
+
+@media (max-width: 400px) {
+    :root {
+        --card-width: 45px;
+        --card-height: 63px;
+    }
+    
+    .bet-buttons {
+        flex-wrap: wrap;
+    }
+    
+    .bet-btn {
+        max-width: 100px;
+    }
+    
+    .chip-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 12px;
+    }
+}
+
+/* 倒计时条 */
+.countdown-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: linear-gradient(90deg, var(--table-green-dark) 0%, var(--table-green) 50%, var(--table-green-dark) 100%);
+    border-left: 2px solid var(--gold);
+    border-right: 2px solid var(--gold);
+}
+
+.countdown-label {
+    font-size: 16px;
+    color: var(--white);
+}
+
+.countdown-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--gold-light);
+    min-width: 40px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px 15px;
+    border-radius: 8px;
+    border: 2px solid var(--gold);
+}
+
+.countdown-value.warning {
+    color: #e74c3c;
+    border-color: #e74c3c;
+    animation: pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* 多人下注区域 */
+.players-bets-area {
+    background: linear-gradient(180deg, var(--table-green) 0%, var(--table-green-dark) 100%);
+    padding: 15px 20px;
+    border-left: 2px solid var(--gold);
+    border-right: 2px solid var(--gold);
+}
+
+.players-bets-area h3 {
+    color: var(--gold-light);
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.players-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    min-height: 40px;
+}
+
+.player-bet-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 2px solid var(--gold);
+}
+
+.player-bet-item .player-name {
+    color: var(--white);
+    font-weight: bold;
+}
+
+.player-bet-item .player-bet-type {
+    color: var(--gold-light);
+    font-size: 14px;
+}
+
+.player-bet-item .player-bet-amount {
+    color: var(--gold-light);
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.no-bets {
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+/* 禁用状态 */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 胜利动画 */
+@keyframes winPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.win-animation {
+    animation: winPulse 0.5s ease-in-out infinite;
+}
+
+/* 登录模态框 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: linear-gradient(180deg, var(--table-green-light) 0%, var(--table-green) 100%);
+    padding: 30px 40px;
+    border-radius: 15px;
+    border: 3px solid var(--gold);
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h2 {
+    color: var(--gold-light);
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--white);
+    font-size: 16px;
+    outline: none;
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.form-group input:focus {
+    border-color: var(--gold-light);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-group .action-btn {
+    flex: 1;
+    padding: 12px 20px;
+}
+
+.btn-group .action-btn.secondary {
+    background: linear-gradient(180deg, #555 0%, #333 100%);
+    color: var(--white);
+}
+
+/* 用户信息 */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    border: 2px solid var(--gold);
+}
+
+.user-info span {
+    color: var(--gold-light);
+    font-weight: bold;
+}
+
+.small-btn {
+    padding: 5px 12px;
+    border: none;
+    border-radius: 5px;
+    background: var(--red);
+    color: var(--white);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.small-btn:hover {
+    background: #a93226;
+}
+
+/* 倒计时显示 */
+.countdown-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.countdown-label {
+    font-size: 12px;
+    color: var(--white);
+    opacity: 0.8;
+}
+
+.countdown-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--gold-light);
+    background: rgba(0, 0, 0, 0.4);
+    padding: 5px 15px;
+    border-radius: 8px;
+    border: 2px solid var(--gold);
+    min-width: 60px;
+    text-align: center;
+}
+
+.countdown-value.warning {
+    color: #e74c3c;
+    border-color: #e74c3c;
+    animation: pulse 0.5s ease-in-out infinite;
+}
+
+.status {
+    font-size: 14px;
+    padding: 3px 10px;
+    border-radius: 10px;
+}
+
+.status.open {
+    background: rgba(46, 204, 113, 0.3);
+    color: #2ecc71;
+}
+
+.status.closed {
+    background: rgba(231, 76, 60, 0.3);
+    color: #e74c3c;
+}
